@@ -11,10 +11,30 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env(
+    # set casting and default values
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
 
+
+#update this in production
+# SECRET_KEY = env('SECRET_KEY')
+# DEBUG = env('DEBUG')
+
+# DATABASES = {
+#     'default': env.db(), # read database URL from DATABASE_URL env var
+# }
+
+# CACHES = {
+#     'default': env.cache(), # read cache URL from CACHE_URL env var
+# }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -89,14 +109,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "socialmedia",
-        "USER":"romankasichhwa",
-        "PASSWORD":"kasichhwa",
-        "HOST":"localhost",
-        "PORT":"5432"
-    }
+    "default": env.db(),
 }
 
 
@@ -151,7 +164,7 @@ REST_FRAMEWORK = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": env("REDIS_URL"),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

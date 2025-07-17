@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+]
+
 
 # Application definition
 
@@ -39,7 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     #3rd party
-    'drf_spectacular',
+    "drf_spectacular",
+    "corsheaders",
     
     
     'api'
@@ -53,6 +61,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    #middleware
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -80,8 +90,12 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "socialmedia",
+        "USER":"romankasichhwa",
+        "PASSWORD":"kasichhwa",
+        "HOST":"localhost",
+        "PORT":"5432"
     }
 }
 

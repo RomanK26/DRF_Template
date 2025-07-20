@@ -21,20 +21,14 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 # reading .env file
-environ.Env.read_env()
+environ.Env.read_env(BASE_DIR / ".env")
 
 
 #update this in production
 # SECRET_KEY = env('SECRET_KEY')
 # DEBUG = env('DEBUG')
 
-# DATABASES = {
-#     'default': env.db(), # read database URL from DATABASE_URL env var
-# }
 
-# CACHES = {
-#     'default': env.cache(), # read cache URL from CACHE_URL env var
-# }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -68,6 +62,7 @@ INSTALLED_APPS = [
     #3rd party
     "drf_spectacular",
     "corsheaders",
+    "rest_framework"
     
     
     'api'

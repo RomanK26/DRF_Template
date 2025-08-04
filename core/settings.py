@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     #3rd party
     "drf_spectacular",
     "corsheaders",
-    "rest_framework"
+    "rest_framework",
     
     
     'api'
